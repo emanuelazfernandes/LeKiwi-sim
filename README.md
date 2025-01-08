@@ -7,3 +7,4 @@
 - For `AttributeError: module 'time' has no attribute 'stop'` use 
 https://github.com/bionicdl-sustech/ACDC4Robot/issues/1
 - Make sure to remove all nested components in CAD
+- Simplify large meshes(like omniwheels) using a [mesh simplifier](https://myminifactory.github.io/Fast-Quadric-Mesh-Simplification/) if mujoco complains about too many faces
