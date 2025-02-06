@@ -1,4 +1,4 @@
-# lcmm_mujoco
+# LeKiwi-sim
 ## Usage
 1. `pip install mujoco`
 2. `python -m mujoco.viewer --mjcf=mjcf_lcmm_robot.xml`
