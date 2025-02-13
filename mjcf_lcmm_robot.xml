@@ -44,9 +44,63 @@
         <mesh name="94868A713_NO-THREADS_Female-Threaded-Hex-Standoff-3" file="meshes/94868A713_NO-THREADS_Female-Threaded-Hex-Standoff-3.stl" scale="0.001 0.001 0.001" />
         <mesh name="drive_motor_mount-v4" file="meshes/drive_motor_mount-v4.stl" scale="0.001 0.001 0.001" />
     </asset>
+
+    <default>
+        <default class="so_arm100">
+            <joint frictionloss="0.1" armature="0.1"/>
+            <position kp="50" dampratio="1" forcerange="-35 35" ctrlrange="-3.14158 3.14158"/>
+            <default class="Rotation">
+                <joint axis="0 1 0" range="-2.2 2.2"/>
+            </default>
+            <default class="Pitch">
+                <joint axis="1 0 0" range="-3.14158 0.2"/>
+            </default>
+            <default class="Elbow">
+                <joint axis="1 0 0" range="0 3.14158"/>
+            </default>
+            <default class="Wrist_Pitch">
+                <joint axis="1 0 0" range="-2.0 1.8"/>
+            </default>
+            <default class="Wrist_Roll">
+                <joint axis="0 1 0" range="-3.14158 3.14158"/>
+            </default>
+            <default class="Jaw">
+                <joint axis="0 0 1" range="-0.2 2.0"/>
+            </default>
+            <default class="visual">
+                <geom type="mesh" contype="0" conaffinity="0" density="0" group="2" material="orange"/>
+                <default class="motor_visual">
+                    <geom material="black"/>
+                </default>
+            </default>
+            <default class="collision">
+                <geom group="3" type="mesh"/>
+                <default class="finger_collision">
+                    <geom type="box" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+                </default>
+            </default>
+        </default>
+    </default>
+
+
+    <actuator>
+        <!-- Base drive motors -->
+        <motor name="drive_motor_1" joint="ST3215_Servo_Motor-v1-2_Hub---Servo" gear="1" />
+        <motor name="drive_motor_2" joint="ST3215_Servo_Motor-v1-1_Hub-2---Servo" gear="1" />
+        <motor name="drive_motor_3" joint="ST3215_Servo_Motor-v1_Revolute-40" gear="1" />
+
+        <!-- Arm joints -->
+        <!-- <motor name="shoulder_pitch" joint="STS3215_03a-v1-4_Revolute-45" gear="1" />
+        <motor name="elbow_pitch" joint="STS3215_03a-v1-3_Revolute-49" gear="1" />
+        <motor name="wrist_pitch" joint="STS3215_03a-v1-2_Revolute-51" gear="1" />
+        <motor name="wrist_roll_1" joint="STS3215_03a-v1-1_Revolute-53" gear="1" />
+        <motor name="wrist_roll_2" joint="STS3215_03a_Wrist_Roll-v1_Revolute-55" gear="1" />
+        <motor name="gripper" joint="STS3215_03a-v1_Revolute-57" gear="1" /> -->
+    </actuator>
+
     <worldbody>
         <light directional="true" pos="-0.5 0.5 3" dir="0 0 -1" />
-        <geom pos="0 0 0" size="1 1 1" type="plane" rgba="1 0.83 0.61 0.5" />
+        <!-- <geom pos="0 0 0" size="1 1 1" type="plane" rgba="1 0.83 0.61 0.5" /> -->
         <body name="base_plate_layer1-v5-1" pos="0.0 0.0 0.0" euler="-0.0 0.0 -0.0">
             <geom name="base_plate_layer1-v5-1_geom" type="mesh" mesh="base_plate_layer1-v5-1" pos="0 0 0" euler="0 0 0" />
             <inertial mass="1.9468624348344596" pos="-4.730687660675253e-15 -2.7155537377808555e-05 -0.0035000000000000005" fullinertia="0.005637109888809055 0.005628440956780792 0.0112496514690387 1.3447333053523504e-16 1.7848833522297417e-20 2.6469779601696886e-23" />
@@ -149,7 +203,7 @@
                     <inertial mass="0.1256590419653392" pos="-0.0036436981408919968 -0.0003259633563240798 0.004946871759115404" fullinertia="5.8982381320791524e-05 0.00013338786905954623 0.00018586375094365218 1.6170683703385845e-07 2.7949770042390678e-06 -5.073018525688329e-07" />
                 </body>
             </body>
-            <body name="Base_08q-v1" pos="2.6918962747757292e-09 0.02194800925240681 -0.0024000000000000553" euler="-1.5707963267948968 -1.2246467991473537e-16 3.141592653589793">
+            <!-- <body name="Base_08q-v1" pos="2.6918962747757292e-09 0.02194800925240681 -0.0024000000000000553" euler="-1.5707963267948968 -1.2246467991473537e-16 3.141592653589793">
                 <geom name="Base_08q-v1_geom" type="mesh" mesh="Base_08q-v1" pos="0 0 0" euler="0 0 0" />
                 <inertial mass="1.2829039880853146" pos="-2.9500744205753635e-06 0.02426552372353218 0.01830293573111294" fullinertia="0.0013599465686859134 0.0017754186964794691 0.0015570925522625369 1.4799628966954187e-07 2.7674912025061326e-08 0.00024876935781550404" />
                 <body name="WaveShare_Mounting_Plate_01d-v1" pos="-5.000000000000338e-05 0.06269999999999999 -0.0248" euler="-4.930380657631326e-32 0.0 -3.141592653589793">
@@ -218,7 +272,7 @@
                     <geom name="Passive_Horn_01-v1_geom" type="mesh" mesh="Passive_Horn_01-v1" pos="0 0 0" euler="0 0 0" />
                     <inertial mass="0.00454511487954422" pos="-1.7881248309573627e-13 -1.4904879645571163e-20 0.0010740097666847425" fullinertia="1.2518150597416012e-07 1.2518150393394235e-07 2.464408524633815e-07 8.715254501524865e-23 1.283788438507426e-19 -1.6828115086053736e-24" />
                 </body>
-            </body>
+            </body> -->
         </body>
         <body name="drive_motor_mount-v4" pos="-0.020610000007450578 -0.09 0.0020000000000000018" euler="-0.0 0.0 -1.5707963267948966">
             <geom name="drive_motor_mount-v4_geom" type="mesh" mesh="drive_motor_mount-v4" pos="0 0 0" euler="0 0 0" />
